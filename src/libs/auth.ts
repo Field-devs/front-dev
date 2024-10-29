@@ -36,12 +36,12 @@ export const authOptions: NextAuthOptions = {
 
         try {
           // ** Login API Call to match the user credentials and receive user data in response along with his role
-          const res = await fetch(`${process.env.API_URL}/login`, {
+          const res = await fetch(`${process.env.API_URL}/Authorization`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, password, grantType: 'password' })
           })
 
           const data = await res.json()
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
             return data
           }
 
-          return null
+          return data
         } catch (e: any) {
           throw new Error(e.message)
         }
